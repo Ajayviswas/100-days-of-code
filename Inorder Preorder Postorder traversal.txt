@@ -1,0 +1,71 @@
+<---------------------------- PREORDER TRAVERSALS-------------------------------------->
+
+void trav(Node*root,vector<int>&v) // we have to pass the vector through reference  many will commit mistake here
+{
+    if(root==NULL)
+    return;
+    v.push_back(root->data);
+    trav(root->left,v);
+    trav(root->right,v);
+}
+
+vector <int> preorder(Node* root)  // Here as we  should asked to return the output inform of vector so its better to create a new vector
+{
+  vector<int>v;
+  trav(root,v);
+  return v;
+}
+
+
+<---------------------------- POST ORDER TRAVERSALS-------------------------------------->
+
+void trav(Node*root,vector<int>&v)
+{
+    if(root==NULL) return;
+    trav(root->left,v);
+    trav(root->right,v);
+    v.push_back(root->data);
+    
+}
+
+vector <int> postOrder(Node* root)
+{
+  vector<int>v;
+  trav(root,v);
+  return v;
+}
+
+
+
+
+<----------------------------INORDER TRAVERSALS-------------------------------------->
+
+void trav(Node*root,vector<int>&v)
+{
+    if(root==NULL) return;
+    trav(root->left,v);
+    v.push_back(root->data);
+    trav(root->right,v);
+    
+}
+
+vector <int> inOrder(Node* root)
+{
+  vector<int>v;
+  trav(root,v);
+  return v;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
