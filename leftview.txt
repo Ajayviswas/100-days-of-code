@@ -1,0 +1,59 @@
+<-------------------------------LEFT VIEW OF A BINARY TREE----------------------------->
+
+NOTE: Here we have two methods first one is through recursion and second one through iteration .
+
+METHOD 1 :<----------------------THROUGH RECURSION-------------------------------------> 
+
+void left(Node* root,int level,int &max_level,vector<int>&v)
+{
+    if(root==NULL)
+    return;
+    if(max_level<level)
+    {
+        v.push_back(root->data);
+        max_level=level;
+    }
+    left(root->left,level+1,max_level,v);
+    left(root->right,level+1,max_level,v);
+}
+
+vector<int> leftView(Node *root)
+{
+   vector<int>v;
+   int max_level=0;
+   left(root,1,max_level,v);
+   return v;
+}
+
+METHOD 2:<---------------------------THROUGH ITERATION---------------------------------->
+
+HINT : USE QUEUE 
+
+vector<int> leftView(Node *root)
+{
+    if(root==NULL) return{};
+    queue<Node*>q;
+    q.push(root);
+    vector<int>v;
+    while(!q.empty())
+    {
+        Node*temp=q.front();
+        v.push_back(temp->data);
+        int n=q.size();
+        for(int i=0;i<n;i++)
+        {
+            temp=q.front();
+            q.pop();
+            if(temp->left)
+            {
+                q.push(temp->left);
+            }
+            if(temp->right)
+            {
+                q.push(temp->right);
+            }
+        }
+    }
+    return v;
+    
+}
