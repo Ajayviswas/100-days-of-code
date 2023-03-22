@@ -1,0 +1,53 @@
+<---------------------------RIGHT VIEW OF BINARY TREE---------------------------------->
+
+
+METHOD 1 : THORUGH ITERATION PROCESS 
+
+vector<int> rightView(Node *root)
+    {
+       if(root==NULL) return {};
+       queue<Node*>q;
+       vector<int>v;
+       q.push(root);
+       while(!q.empty())
+       {
+           Node*temp=q.front();
+           v.push_back(temp->data);
+           int n=q.size();
+           for(int i=0;i<n;i++)
+           {
+               temp=q.front();
+               q.pop();
+              if(temp->right)
+              q.push(temp->right);
+              if(temp->left)
+              q.push(temp->left);
+           }
+       }
+       return v;
+    }
+
+
+METHOD 2 : THORUGH RECURSION PROCESS 
+
+
+void right(Node* root,int level,int &max_level,vector<int>&v)
+{
+    if(root==NULL)
+    return;
+    if(max_level<level)
+    {
+        v.push_back(root->data);
+        max_level=level;
+    }
+    right(root->right,level+1,max_level,v);
+    right(root->left,level+1,max_level,v);
+}
+
+vector<int> rightView(Node *root)
+{
+   vector<int>v;
+   int max_level=0;
+   right(root,1,max_level,v);
+   return v;
+}
