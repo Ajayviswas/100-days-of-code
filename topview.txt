@@ -1,1 +1,29 @@
-top view of binary tree
+<-----------------------------TOP VIEW OF BINARY TREE-------------------------------------------->
+
+vector<int> topView(Node *root)
+    {
+         vector<int>v;
+        if(root==NULL) return v;
+        queue<pair<Node*,int>>q;
+       // vector<int>v;
+        map<int,int>m;
+        q.push({root,0});
+        while(!q.empty())
+        {
+            auto it = q.front();
+            q.pop();
+            Node*node=it.first;
+            int cnt=it.second;
+            if(m.find(cnt)==m.end()) 
+            m[cnt]=node->data;
+            if(node->left)
+            q.push({node->left,cnt-1});
+            if(node->right)
+            q.push({node->right,cnt+1});
+        }
+        for(auto i:m)
+        {
+           v.push_back(i.second);
+        }
+        return v;
+    }
