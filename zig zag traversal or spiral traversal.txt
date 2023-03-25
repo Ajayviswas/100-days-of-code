@@ -1,0 +1,28 @@
+<----------------------------------ZIG ZAG TRAVERSAL OR SPIRAL TRAVERSAL-----------------------------------------> 
+
+vector <int> zigZagTraversal(Node* root)
+    {
+        bool leftToright=true;
+    	vector<int>v;
+    	if(root==NULL) return v;
+    	queue<Node*>q;
+    	q.push(root);
+    	while(!q.empty())
+    	{
+    	    int n=q.size();
+    	    vector<int>t(n);
+    	    for(int i=0;i<n;i++)
+    	    {
+    	        Node*node=q.front();
+    	        q.pop();
+    	        int k= leftToright? i : n-i-1;
+    	        t[k]=node->data;
+    	        if(node->left) q.push(node->left);
+    	        if(node->right) q.push(node->right);
+    	    }
+    	    for(auto i:t)
+    	    v.push_back(i);
+    	    leftToright=!leftToright;
+    	}
+    	return v;
+    }
