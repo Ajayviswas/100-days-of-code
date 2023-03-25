@@ -1,0 +1,27 @@
+<------------------------------------BOTTOM VIEW OF BINARY TREE------------------------------------->
+
+NOTE : Here direct recursion is not possible we have to include some extra cases .So its better to use the queue method 
+
+vector<int> result;
+        map<int, int> mp;
+        queue< pair<Node*, int> > q;
+        q.push({root, 0});
+        
+        while( !q.empty() ) {
+            auto top = q.front();
+            q.pop();
+            Node* node = top.first;
+            int level = top.second;
+            
+            mp[level] = node->data;
+            
+            if(node->left)
+                q.push({node->left, level - 1});
+            if(node->right)
+                q.push({node->right, level + 1}); 
+        }
+        
+        for(auto &i : mp)
+            result.emplace_back(i.second);
+        
+        return result;
