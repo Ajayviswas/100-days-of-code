@@ -21,7 +21,7 @@ vector<int> result;
                 q.push({node->right, level + 1}); 
         }
         
-        for(auto &i : mp)
-            result.emplace_back(i.second);
+        for(auto i : mp)
+            result.push_back(i.second);
         
         return result;
