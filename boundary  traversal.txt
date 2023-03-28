@@ -1,0 +1,66 @@
+<---------------------------------BOUNDARY TRAVERSAL------------------------------------------->
+
+
+bool isleaf(Node*root)
+    {
+        if(root->right==NULL&&root->left==NULL)
+        return true;
+        else
+        return false;
+    }
+    
+    void left(Node*root,vector<int>&v)
+    {
+        Node*curr=root->left;
+        while(curr)
+        {
+            if(!isleaf(curr))
+            v.push_back(curr->data);
+            if(curr->left) 
+            curr=curr->left;
+            else 
+            curr=curr->right;
+        }
+    }
+    
+    void right(Node*root,vector<int>&v)
+    {
+        vector<int>v1;
+        Node*curr=root->right;
+        while(curr)
+        {
+            if(!isleaf(curr))
+            v1.push_back(curr->data);
+            if(curr->right)
+            curr=curr->right;
+            else
+            curr=curr->left;
+        }
+        for(int i=v1.size()-1;i>=0;--i)
+        v.push_back(v1[i]);
+    }
+    
+    void leafnode(Node*root,vector<int>&v)
+    {
+        if(isleaf(root)) 
+        {
+           v.push_back(root->data);
+           return;
+        }
+       
+        if(root->left)  leafnode(root->left,v);
+        if(root->right)  leafnode(root->right,v);
+    }
+    
+    vector <int> boundary(Node *root)
+    {
+        vector<int>v;
+        if(root==NULL) 
+        return v;
+        if(!isleaf(root)) 
+        v.push_back(root->data);
+        left(root,v);
+        leafnode(root,v);
+        right(root,v);
+        return v;
+    }
