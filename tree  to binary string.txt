@@ -1,0 +1,23 @@
+<------------------------------BINARY TREE TO STRING---------------------------------->
+
+ void treetostr(TreeNode* root,string &s){
+        s+=to_string(root->val);                          
+        if(root->left)
+         treetostr(root->left,s+='(');              
+        if(!root->left && root->right)
+         s+="()";               
+        if(root->right)
+         treetostr(root->right,s+='(');            
+        s+=')';                                        
+        return;
+    }
+    string tree2str(TreeNode* root) {
+       if(root==NULL)
+        return "";
+       string s;
+       treetostr(root,s);
+       s.pop_back();                              
+       return s;
+    }
+};
+
