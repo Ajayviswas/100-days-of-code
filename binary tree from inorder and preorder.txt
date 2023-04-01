@@ -1,0 +1,33 @@
+<-------------------Binary tree from Inorder and Preorder------------------------->
+
+
+class Solution{
+    public:
+    int prein=0;
+    int search(int in[],int lb,int ub,int data)
+    {
+        int i;
+        for(i=lb;i<=ub;i++)
+        {
+            if(in[i]==data)
+            return i;
+        }
+    }
+    Node*build(int in[],int pre[],int lb,int ub)
+    {
+        if(lb>ub)
+        return NULL;
+        Node*node=new Node(pre[prein++]);
+        if(lb==ub)
+        return node;
+        int mid=search(in,lb,ub,node->data);
+        node->left=build(in,pre,lb,mid-1);
+        node->right=build(in,pre,mid+1,ub);
+        return node;
+    }
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        Node*root=build(in,pre,0,n-1);
+        return root;
+    }
+};
