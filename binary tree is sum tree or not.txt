@@ -1,0 +1,20 @@
+<------------------SUM TREE  OR NOT ------------------------->
+
+int solve(Node*root)
+    {
+        if(root==NULL)
+        return 0;
+        if(root->left==NULL&&root->right==NULL)
+        return root->data;
+        int leftsum=solve(root->left);
+        int rightsum=solve(root->right);
+        if(root->data!=leftsum+rightsum)
+        k=false;
+        return leftsum+rightsum+root->data;
+    }
+    bool isSumTree(Node* root)
+    {
+        k=true;
+        solve(root);
+        return k;
+    }
