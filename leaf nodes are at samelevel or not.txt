@@ -1,0 +1,24 @@
+<---------------leaf are at same level  or not ---------------------->
+
+int k=-1;
+    bool f=true;
+    int height(Node*root,int h)
+    {
+        if(root==NULL)
+        return 0;
+        if(root->right==NULL&&root->left==NULL)
+        {
+            if(k==-1)
+            k=h;
+            else if(h!=k)
+            f=false;
+        }
+        height(root->left,h+1);
+        height(root->right,h+1);
+    }
+    bool check(Node *root)
+    {
+       //bool f=true;
+       height(root,0);
+       return f;
+    }
