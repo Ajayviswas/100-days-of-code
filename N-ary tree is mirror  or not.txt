@@ -1,0 +1,16 @@
+<------------------Given Binary Tree  is Mirror or Not-------------------------------->
+
+int checkMirrorTree(int n, int e, int a[], int b[]) {
+        unordered_map<int,stack<int>>s;
+        for(int i=0;i<2*e;i=i+2)
+        {
+            s[a[i]].push(a[i+1]);
+        }
+        for(int i=0;i<2*e;i=i+2)
+        {
+            if(s[b[i]].top()!=b[i+1])
+            return 0;
+            s[b[i]].pop();
+        }
+        return 1;
+    }
