@@ -1,0 +1,27 @@
+<----------------------------------MAXIMUM SUM OF NON ADJACENT NODES------------------------------------>
+
+METHOD 1 : Simple dp approach always draw the tree and understand thoroughly
+
+ unordered_map<Node*,int>mp;
+    int solve(Node* root){
+        if(!root) return 0;
+        if(mp[root]) return mp[root];
+        int withNode = root->data;
+        if(root->left)
+        {
+           withNode += solve(root->left->left);
+           withNode += solve(root->left->right);
+        }
+        if(root->right)
+        {
+            withNode += solve(root->right->left);
+            withNode += solve(root->right->right);
+        }
+        int withoutNode = solve(root->left) + solve(root->right);
+        mp[root] = max(withNode,withoutNode);
+        return mp[root];
+    }
+    int getMaxSum(Node *root) 
+    {
+        return solve(root);
+    }
