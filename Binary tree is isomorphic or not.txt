@@ -1,0 +1,14 @@
+<-------------------Tree is Isomorphic or not-------------------->
+
+bool isIsomorphic(Node *root1,Node *root2)
+    {
+         if(!root1 || !root2 ) return root1==root2;
+      if(root1->data!=root2->data){
+          return false;
+      }
+      bool lh=isIsomorphic(root1->left , root2->left);
+      bool rh=isIsomorphic(root1->right , root2->right);
+      bool lh2=isIsomorphic(root1->left , root2->right);
+      bool rh2=isIsomorphic(root1->right , root2->left);
+      return lh && rh || lh2&&rh2 ;
+    }
