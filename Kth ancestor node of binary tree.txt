@@ -1,0 +1,26 @@
+<-----------------------------Kth Ancestor Node of a Binary tree----------------------------->
+
+int solve(Node*root,int k,int node,int &ans)
+{
+    if(root==NULL)
+    return -1;
+    if(root->data==node)
+    return 1;
+    int left=solve(root->left,k,node,ans);
+    int right=solve(root->right,k,node,ans);
+    if(left==k||right==k)
+    {
+        ans=root->data;
+        return -1;
+    }
+    if(left!=-1)
+    return left+1;
+    if(right!=-1)
+    return right+1;
+}
+int kthAncestor(Node *root, int k, int node)
+{
+    int ans=-1;
+    int k1=solve(root,k,node,ans);
+    return ans;
+}
