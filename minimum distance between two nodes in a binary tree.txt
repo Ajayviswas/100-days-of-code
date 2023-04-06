@@ -1,0 +1,48 @@
+<-----------------MINIMUM DISTANCE BETWEEN TWO NODES IN A BINARY TREE--------------------------->
+
+
+ Node* lca(Node* root ,int n1 ,int n2 )
+    {
+        if(root==NULL||root->data==n1||root->data==n2)
+        {
+            return root;
+        }
+        Node*left=lca(root->left,n1,n2);
+        Node*right=lca(root->right,n1,n2);
+        if(left==NULL)
+        {
+            return right;
+        }
+        else if(right==NULL)
+        {
+            return left;
+        }
+        else
+        {
+            return root;
+        }
+    }
+    int finddis(Node*r,int k,int d)
+    {
+        if(r==NULL)
+        {
+            return -1;
+        }
+        if(r->data==k)
+        {
+            return d;
+        }
+        int left=finddis(r->left,k,d+1);
+        if(left!=-1)
+        return left;
+        int right=finddis(r->right,k,d+1);
+        if(right!=-1)
+        return right;
+    }
+    int findDist(Node* root, int n1, int n2) 
+    {
+       Node*r=lca(root,n1,n2);
+       int d1=finddis(r,n1,0);
+       int d2=finddis(r,n2,0);
+       return d1+d2;
+    }
