@@ -1,4 +1,4 @@
-<-------------------Tree is Isomorphic or not-------------------->
+<-------------------Tree is Isomorphic or Not-------------------->
 
 bool isIsomorphic(Node *root1,Node *root2)
     {
