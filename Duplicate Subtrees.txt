@@ -1,0 +1,19 @@
+<-----------------------------DUPLICATE SUBTREES ------------------------------------>
+
+string solve(Node*root,unordered_map<string,int>&m,vector<Node*>&v)
+{
+    if(root==NULL)
+    return "N";
+    string s=to_string(root->data)+","+solve(root->left,m,v)+","+solve(root->right,m,v);
+    if(m[s]==1)
+    v.push_back(root);
+    m[s]++;
+    return s;
+}
+vector<Node*> printAllDups(Node* root)
+{
+    unordered_map<string,int>m;
+    vector<Node*>v;
+    solve(root,m,v);
+    return v;
+}
