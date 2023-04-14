@@ -1,0 +1,34 @@
+<------------duplicate subtrees morethan two------------------>
+
+unordered_map<string,int>m;
+   string solve(Node*root)
+   {
+       if(root==NULL)
+       return "N";
+       string s="";
+       if(root->right==NULL&&root->left==NULL)
+       {
+           s=to_string(root->data);
+           s+="N";
+           return s;
+           
+       }
+       s=s+to_string(root->data);
+        s+="N";
+       s=s+solve(root->left);
+        s+="N";
+       s=s+solve(root->right);
+        s+="N";
+       m[s]++;
+       return s;
+   }
+    int dupSub(Node *root) {
+        m.clear();
+        solve(root);
+        for(auto x:m)
+        {
+            if(x.second>=2)
+            return true;
+        }
+        return false;
+    }
