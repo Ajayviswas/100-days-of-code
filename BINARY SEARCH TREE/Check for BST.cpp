@@ -29,4 +29,29 @@ vector<int>v;
         return true;
         else
         return false;
+    }   
+
+
+    <---------------------METHOD TWO OPTIMISED WITHOUT USING VECTOR------------------------->
+
+     bool solve(Node*root,int min,int max)
+    {
+        if(root==NULL)
+        return true;
+         if (root->data<=min ||root->data>=max) return false;
+        if(root->data>=min&&root->data<=max)
+        {
+            bool left=solve(root->left,min,root->data);
+            bool right=solve(root->right,root->data,max);
+            return left&&right;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+    bool isBST(Node* root) 
+    {
+        solve(root,INT_MIN,INT_MAX);
     }
