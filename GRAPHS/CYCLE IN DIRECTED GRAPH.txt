@@ -1,0 +1,40 @@
+<--------------CYCLE IN DIRECTED USING DFS---------------->
+
+bool checkCycle(vector<int>&vis,vector<int>&dfs,vector<int>adj[],int node)
+    {
+        vis[node]=1;
+        dfs[node]=1;
+        for(auto i : adj[node])
+        {
+            if(!vis[i])
+            {
+              if(checkCycle(vis,dfs,adj,i))
+              {
+                  return true;
+              }
+            }
+            else if(dfs[i])
+            {
+                return true;
+            }
+        }
+        dfs[node]=0;
+        return false;
+    }
+    bool isCyclic(int V, vector<int> adj[]) 
+    {
+        vector<int>vis(V,0);
+        vector<int>dfs(V,0);
+        for(int i=0;i<V;i++)
+        {
+            if(!vis[i])
+            {
+                if(checkCycle(vis,dfs,adj,i))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
