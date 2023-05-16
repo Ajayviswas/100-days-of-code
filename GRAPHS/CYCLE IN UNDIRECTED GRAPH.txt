@@ -1,0 +1,43 @@
+<-------------CYCLE IN UNDIRECTED GRAPH------------------->
+
+USING BFS:
+
+ bool checkCycle(vector<int>adj[],int vis[],int source)
+    {
+        queue<pair<int,int>>q;
+        vis[source]=1;
+        q.push({source,-1});
+        while(!q.empty())
+        {
+            int node=q.front().first;
+            int parent=q.front().second;
+            q.pop();
+            for(auto i : adj[node])
+            {
+                if(!vis[i])
+                {
+                    vis[i]=1;
+                    q.push({i,node});
+                }
+                else if(parent!=i)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    bool isCycle(int V, vector<int> adj[]) {
+        int vis[V]={0};
+        for(int i=0;i<V;i++)
+        {
+            if(!vis[i])
+            {
+                if(checkCycle(adj,vis,i))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
