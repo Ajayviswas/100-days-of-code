@@ -1,0 +1,26 @@
+<--------------------------FLOOD FILL ALGORITHM-------------------------------->
+
+ void dfs(int row,int col,vector<vector<int>>&ans,vector<vector<int>>&image,int incol,int dr[],int dc[],int color)
+    {
+        ans[row][col]=color;
+        int m=ans.size();
+        int n=ans[0].size();
+        for(int i=0;i<4;i++)
+        {
+          int   nrow=row+dr[i];
+          int   ncol=col+dc[i];
+            if(nrow>=0&&nrow<m&&ncol>=0&&ncol<n&& image[nrow][ncol]==incol&&ans[nrow][ncol]!=color)
+            {
+                dfs(nrow,ncol,ans,image,incol,dr,dc,color);
+            }
+        }
+    }
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color)
+    {
+         int incol=image[sr][sc];
+        int dr[]={-1,0,1,0};
+        int dc[]={0,-1,0,1};
+        vector<vector<int>>ans=image;
+        dfs(sr,sc,ans,image,incol,dr,dc,color);
+        return ans;
+    }
